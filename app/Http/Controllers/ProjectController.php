@@ -82,8 +82,8 @@ class ProjectController extends Controller
     {
         $project =  Project::findOrFail($id);
         $data = $request->validate([
-            "title" => "required",
-            "description" => "required",
+            "title" => "required|min:3",
+            "description" => "required|min:10",
             "img" => "required",
             "type_id" => "required"
 

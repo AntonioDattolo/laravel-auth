@@ -25,16 +25,19 @@
             <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Img URL" name="img"
                 value="{{ old('img') ?? $project->img }}">
         </div>
-        <select name="type_id" id="">
-            <option value="{{$type[0]->id}}">{{$type[0]->name}}</option>
-            <option value="{{$type[1]->id}}">{{$type[1]->name}}</option>
-            <option value="{{$type[2]->id}}">{{$type[2]->name}}</option>
-            <option value="{{$type[3]->id}}">{{$type[3]->name}}</option>
-        </select>
         @error('img')
             <div>NON FUNZIONA</div>
         @enderror
+        <select name="type_id" id="">
+            @foreach ($type as $i => $item)
+                @if($item->id == $project->type->id )
+                    <option value="{{$item->id}}" selected>{{$item->name}}</option>   
+                @else
+                    <option value="{{$item->id}}">{{$item->name}}</option>  
+                @endif
+            @endforeach
+        </select>
 
-        <button type="submit"> AGGIUNGI </button>
+        <button type="submit"> Modifica </button>
     </form>
 @endsection
