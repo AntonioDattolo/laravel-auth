@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 
+
 class ProjectTableSeeder extends Seeder
 {
     /**
@@ -20,6 +21,7 @@ class ProjectTableSeeder extends Seeder
             $newProject->description = $faker->sentence(22);
             $newProject->img = "https://picsum.photos/id/" . rand(1, 250) . "/450/450";
             $newProject->type_id = $faker->numberBetween(1,4);
+            $newProject->technologies()->attach($faker->numberBetween(1,4));
             $newProject->save();
         }
     }

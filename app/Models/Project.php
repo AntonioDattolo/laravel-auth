@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-
+    protected $table = 'projects';
     protected $fillable = [
         'title',
         'description',
@@ -19,4 +19,11 @@ class Project extends Model
     {
         return $this->belongsTo(Type::class);
     }
+    public function technologies()
+    {
+        // return $this->belongsToMany(Technology::class);
+        return $this->belongsToMany('App\Models\Technology');
+    }
+
+    
 }

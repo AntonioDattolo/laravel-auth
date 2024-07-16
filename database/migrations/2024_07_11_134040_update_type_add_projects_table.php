@@ -17,7 +17,11 @@ return new class extends Migration
         //php artisan make:migration update_projects_table
         Schema::table('projects', function (Blueprint $table) {
             $table->foreignId('type_id')->constrained();
+            
+           
         });
+
+      
     }
 
     /**
