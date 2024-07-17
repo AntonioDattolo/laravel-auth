@@ -52,7 +52,7 @@
             @endforeach
         </select>
         <div class="mb-4 row">
-            <label for="items" class="col-md-2 col-form-label text-md-right">Technology</label>
+            <label class="col-md-2 col-form-label text-md-right">Technology</label>
             <div class="col-md-10">
                @foreach ($technology as $i => $item)
                 <div class="form-check">
@@ -60,15 +60,15 @@
                     @if($item->id == isset($project->technologies[$i]->id))
                     
                     <input class="form-check-input" type="checkbox" name="technologies[]" value="{{ $item->id }}"
-                    id="item{{ $item->id }}" checked>
-                    <label class="form-check-label" for="item{{ $item->id }}">
+                    id="tech{{ $item->id }}" checked>
+                    <label class="form-check-label" for="tech{{ $item->id }}">
                         {{ $item->name }}
                     </label>
                     @else
                     
                     <input class="form-check-input" type="checkbox" name="technologies[]" value="{{ $item->id }}"
-                    id="item{{ $item->id }}">
-                    <label class="form-check-label" for="item{{ $item->id }}">
+                    id="tech{{ $item->id }}">
+                    <label class="form-check-label" for="tech{{ $item->id }}">
                         {{ $item->name }}
                     </label>
                     

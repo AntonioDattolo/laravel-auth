@@ -18,8 +18,16 @@
                         <td class="p-1 w-25" style="width: 5%">  @foreach($item->projects as $tech)
                             <span> {{$tech->title}} </span>
                             @endforeach</td>
-                        <td>{{ $item['name'] }}</td>
-                        <td class="w-50">{{ $item['description'] }}</td>
+                        <td>
+                            <h5>
+                                {{ $item['name'] }}
+                            </h5>
+                        </td>
+                        <td class="w-50">
+                            <p>
+                                {{ $item['description'] }}
+                            </p>
+                        </td>
                         <td>
                             <div class="d-flex">    
                             <a href="Technology/{{$item->id}}" style="text-style:none;">

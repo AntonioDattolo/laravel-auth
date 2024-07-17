@@ -47,18 +47,27 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->validate([
+            "title" => "required|min:3",
+            "description" => "required|min:10",
+            "img" => "required",
+            "type_id" => "required",
+            "technologies" => 'array',
+            "technologies" => 'exists:technologies,id',
+
+        ]);
+
         $data = $request->all();
         $newProject = new Project;
         $newProject->title = $data['title'];
         $newProject->description = $data['description'];
-        // $newProject->img = $data['img'];
+       
         if ($request->has('img')) {
-            // save the image
-
+        
             $image_path = Storage::put('uploads', $data['img']);
-            $newProject->img= $image_path;
-            //dd($image_path, $val_data);
+            $newProject->img= $image_path; 
         }
+
         $newProject->type_id = $data['type_id'];
         $newProject->save();
         $tech= isset($data['technologies']);
@@ -110,7 +119,7 @@ class ProjectController extends Controller
         $data = $request->validate([
             "title" => "required|min:3",
             "description" => "required|min:10",
-            "img" => "required",
+            "img" => "required|min:5",
             "type_id" => "required",
             "technologies" => 'array',
             "technologies" => 'exists:technologies,id',

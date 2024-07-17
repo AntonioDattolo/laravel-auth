@@ -12,9 +12,17 @@
        <i class="{{$project->type->icon}}" style="font-size: 50px">&nbsp;&nbsp;</i><i class="{{isset($technology[0]->icon)}}" style="font-size: 45px"></i>
     </p>
     <div class="col-12 d-flex p-3" style="border-bottom:2px solid whitesmoke; border-right: 15px solid whitesmoke ">
-        <div class="text-center col-6" style="font-size: 40px">{{ $project->description }}   {{$project->type->description}} </div>
+        <div class="text-center col-6" style="font-size: 40px">
+            <p>
+                {{ $project->description }}   {{$project->type->description}} 
+            </p>
+        </div>
         <div class="col-6 text-center">
-            <img style="object-fit:contain" src="{{ $project->img }}" alt="">
+            @if (Str::startsWith($project->img, 'http'))
+            <img width="card-img-top object-fit-fill  rounded p-2" src="{{ $project['img'] }}" style="height: 350px; width :350px">
+            @else
+            <img width="card-img-top object-fit-fill  rounded p-2" src="{{ asset('/storage/' . $project->img) }}" style="height: 350px; width :350px">
+            @endif
         </div>
     </div>
 </section>

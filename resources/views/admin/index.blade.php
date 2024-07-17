@@ -26,7 +26,12 @@
                 
                         </td>
 
-                        <td class="w-25">{{ $item['title'] }}</td>
+                        <td class="w-25">
+                            <h3>
+                                {{ $item['title'] }}
+                            </h3>
+                                
+                        </td>
 
                         <td class="w-25">
 
