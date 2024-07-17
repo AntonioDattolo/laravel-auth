@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class ProjectController extends Controller
     public function index()
     {
         $data = [
-            'projects' => Project::all(),
+            'projects' => Project::with('technologies')->get(),
             // 'type' => Type::all() Non è necessario in quanto recupera il nome del type attraverso la RELATIONS delle tabelle
         ];
         return view('admin.index', $data);
@@ -29,6 +30,7 @@ class ProjectController extends Controller
         $data = [
             
             'type' => Type::all(),
+            'technology' => Technology::all()
             
         ];
         return view("admin.create", $data);
@@ -46,6 +48,12 @@ class ProjectController extends Controller
         $newProject->img = $data['img'];
         $newProject->type_id = $data['type_id'];
         $newProject->save();
+        $tech= $data['technologies'];
+        if (isset($data['technologies'])) {
+            $newProject->technologies()->attach($tech);
+        }
+
+        
         return redirect()->route('admin.Project.show', $newProject->id);
     }
 
@@ -55,8 +63,10 @@ class ProjectController extends Controller
     public function show(string $id)
     {
         $selectedProject =  Project::findOrFail($id);
+        // $selectedTech = Technology::findOrFail();
         $data = [
-            "project" => $selectedProject
+            "project" => $selectedProject,
+            "technology" => $selectedProject->technologies
         ];
         return view("admin.show", $data);
     }
@@ -70,6 +80,7 @@ class ProjectController extends Controller
         $data = [
             "project" => $selectedProject,
             'type' => Type::all(),
+            'technology' => Technology::all(),
             // Questo invece è necessario in quanto bisogna passargli tutti gli ID della tabella TYPE
         ];
         return view("admin.edit", $data);
@@ -85,7 +96,9 @@ class ProjectController extends Controller
             "title" => "required|min:3",
             "description" => "required|min:10",
             "img" => "required",
-            "type_id" => "required"
+            "type_id" => "required",
+             "technologies" => 'array',
+            //  'technologies' => 'exists:technologies,id',
 
         ]);
 
@@ -93,8 +106,11 @@ class ProjectController extends Controller
         // $project->fill($data);
         // $project->save();
         $project->update($data);
+        if (isset($data['technologies'])) {
+            $project->technologies()->sync($data['technologies']);
+        }
 
-        return redirect()->route('admin.Project.show', $project->id);
+        return redirect()->route('admin.Project.show', $project->id );
     }
 
     /**

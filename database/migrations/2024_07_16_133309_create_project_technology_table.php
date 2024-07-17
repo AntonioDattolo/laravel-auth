@@ -12,11 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('project_technology', function (Blueprint $table) {
-            $table->unsignedBigInteger('project_id')->nullable();
-            $table->foreign('project_id')->references('id')->on('projects');
+             $table->id();
+
+            // $table->foreignId('project_id')->constrained();
+            // $table->foreignId('technology_id')->constrained();
+            $table->timestamps();
+
+
+
+
+
+
+             $table->unsignedBigInteger('project_id')->constrained();
+             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+           
             
-            $table->unsignedBigInteger('technology_id')->nullable();
-            $table->foreign('technology_id')->references('id')->on('technologies');
+             $table->unsignedBigInteger('technology_id')->constrained();
+             $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');
+            //  $table->primary(['project_id','technology_id']);
         });
     }
 

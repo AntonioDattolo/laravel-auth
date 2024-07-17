@@ -55,7 +55,31 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.Project.create' ? 'bg-secondary' : '' }}"
                                     href="{{ route('admin.Project.create') }}">
-                                    <i class="fa-solid fa-plus"></i> Add a Project
+                                    <i class="fa-solid fa-plus"></i><i class="fa-solid fa-diagram-project"></i> Add a Project
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.Type.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.Type.index') }}">
+                                    <i class="fa-solid fa-strikethrough"></i> Type
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.Type.create' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.Type.create') }}">
+                                    <i class="fa-solid fa-strikethrough"></i><i class="fa-solid fa-plus"></i> Add Type
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.Technology.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.Technology.index') }}">
+                                    <i class="fa-solid fa-microchip"></i> Technology
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.Technology.create' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.Technology.create') }}">
+                                    <i class="fa-solid fa-microchip"></i><i class="fa-solid fa-plus"></i> Add Technology
                                 </a>
                             </li>
 

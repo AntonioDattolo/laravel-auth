@@ -12,7 +12,11 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        //
+        
+        $data = [
+            'technologies' => Technology::all()
+        ];
+        return view('technologies.index', $data);
     }
 
     /**
@@ -20,7 +24,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('technologies.create');
     }
 
     /**
@@ -28,38 +32,71 @@ class TechnologyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'description'=> 'required',
+            'icon'=> 'required',
+        ]);
+
+        $newTechnology = new Technology();
+        $newTechnology->fill($data);
+        $newTechnology->save();
+
+        return redirect()->route('admin.Technology.show', $newTechnology);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Technology $technology)
+    public function show(string $id)
     {
-        //
+        $selectedTechnology = Technology::findOrFail($id);
+        $data = [
+            'technologies' => $selectedTechnology
+        ];
+        return view('technologies.show', $data);
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Technology $technology)
+    public function edit(string $id)
     {
-        //
+        $selectedTechnology =  Technology::findOrFail($id);
+        $data = [
+            "technology" => $selectedTechnology,
+
+        ];
+
+        return view('technologies.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Technology $technology)
+    public function update(Request $request, string $id)
     {
-        //
+        $technology =  Technology::findOrFail($id);
+        $data = $request->validate([
+            "name" => "required|min:3",
+            "description" => "required|min:10",
+            "icon" => "required",
+
+        ]);
+        $technology->update($data);
+
+        return redirect()->route('admin.Technology.show', $technology->id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Technology $technology)
+    public function destroy(string $id)
     {
-        //
+        $technology =  Technology::findOrFail($id);
+        $technology->delete();
+
+        return redirect()->route('admin.Technology.index');
     }
 }

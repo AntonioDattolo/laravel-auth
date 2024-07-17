@@ -12,7 +12,11 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        
+        $data = [
+            'type' => Type::all()
+        ];
+        return view('type.index', $data);
     }
 
     /**
@@ -20,7 +24,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('type.create');
     }
 
     /**
@@ -28,38 +32,71 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'description'=> 'required',
+            'icon'=> 'required',
+        ]);
+
+        $newType = new Type();
+        $newType->fill($data);
+        $newType->save();
+
+        return redirect()->route('admin.Type.show', $newType);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Type $type)
+    public function show(string $id)
     {
-        //
+        $selectedType = Type::findOrFail($id);
+        $data = [
+            'type' => $selectedType
+        ];
+        return view('type.show', $data);
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Type $type)
+    public function edit(string $id)
     {
-        //
+        $selectedType =  Type::findOrFail($id);
+        $data = [
+            "type" => $selectedType,
+
+        ];
+
+        return view('type.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Type $type)
+    public function update(Request $request, string $id)
     {
-        //
+        $type =  Type::findOrFail($id);
+        $data = $request->validate([
+            "name" => "required|min:3",
+            "icon" => "required",
+            "description" => "required|min:10",
+
+        ]);
+        $type->update($data);
+
+        return redirect()->route('admin.Type.show', $type->id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Type $type)
+    public function destroy(string $id)
     {
-        //
+        $type =  Type::findOrFail($id);
+        $type->delete();
+
+        return redirect()->route('admin.Type.index');
     }
 }

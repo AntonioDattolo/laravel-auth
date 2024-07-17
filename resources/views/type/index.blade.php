@@ -5,48 +5,38 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Project</th>
+                   
                     <th scope="col">Name</th>
-                    <th scope="col">Type</th>
+                    <th scope="col">Icon</th>
                     <th scope="col">Description</th>
                     <th scope="col">Option</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($projects as $i => $item)
+                @foreach ($type as $i => $item)
                     <tr style="border-bottom: 0.5px solid rgb(245, 245, 245)">
                         <th scope="row">#{{ $i + 1 }}</th>
-                        <td class="p-1" style="width: 5%"><img src="{{ $item['img'] }}"
-                                class="card-img-top object-fit-fill  rounded p-2" alt="..."
-                                style="height: 100px; width :100px"></td>
-                        <td class="w-25">{{ $item['title'] }}</td>
-                        <td class="w-25">
-                            {{$item->type->name}}
-                             with: 
-                            @foreach($item->technologies as $tech)
-                            <span> {{$tech->name}} </span>
-                            @endforeach
-                        </td>
+                        <td class="w-25">{{ $item['name'] }}</td>
+                        <td><i class="{{ $item['icon'] }}"></i></td>
                         <td class="w-50">{{ $item['description'] }}</td>
                         <td>
-                            <div class="d-flex">
-                                
-                            <a href="Project/{{$item->id}}" style="text-style:none;">
+                            <div class="d-flex">   
+                            <a href="Type/{{$item->id}}" style="text-style:none;">
                                 <button type="submit" class="badge" style="background-color: black; color: rgb(13, 65, 250)">
                                     More details
                                 </button>
                             </a> 
-                                <a href="Project/{{ $item->id }}/edit" style=" text-style:none;">
+                                <a href="Type/{{ $item->id }}/edit" style=" text-style:none;">
                                     <button type="submit" class="badge"
                                         style="background-color: black; color: rgb(11, 197, 52)">
                                         Modify
                                     </button>
                                 </a>
-                                <form action="{{ route('admin.Project.destroy', $item->id) }}" method="POST">
+                                {{-- <form action="{{ route('admin.Type.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="badge" style="background-color: black; color: red">Delete
-                                </form>
+                                </form> --}}
                             </div>
                         </td>
                     </tr>

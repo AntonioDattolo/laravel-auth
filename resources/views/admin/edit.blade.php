@@ -37,6 +37,25 @@
                 @endif
             @endforeach
         </select>
+        <div class="mb-4 row">
+            <label for="items" class="col-md-2 col-form-label text-md-right">Technology</label>
+            <div class="col-md-10">
+                @foreach ($technology as $item)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="technologies[]" value="{{ $item->id }}"
+                            id="item{{ $item->id }}">
+                        <label class="form-check-label" for="item{{ $item->id }}">
+                            {{ $item->name }}
+                        </label>
+                    </div>
+                @endforeach
+                @error('items')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
 
         <button type="submit"> Modifica </button>
     </form>
