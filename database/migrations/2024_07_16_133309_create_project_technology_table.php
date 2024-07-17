@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('project_technology', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('project_id')->constrained();
+            $table->unsignedBigInteger('project_id')->constrained()->nullable();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-            $table->unsignedBigInteger('technology_id')->constrained();
+            $table->unsignedBigInteger('technology_id')->constrained()->nullable();
             $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');
 
         });
