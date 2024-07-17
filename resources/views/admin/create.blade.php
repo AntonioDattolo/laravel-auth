@@ -7,15 +7,30 @@
             <label for="formGroupExampleInput" class="form-label">Title</label>
             <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Project Title" name="title">
         </div>
+         @error('title')
+        <span class="bg-danger" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
         <div class="w-50 m-5">
             <label for="formGroupExampleInput2" class="form-label">Description</label>
             <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Description"
                 name="description">
         </div>
+         @error('description')
+        <span class="bg-danger" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
         <div class="w-50 m-5">
             <label for="formGroupExampleInput2" class="form-label">Image</label>
             <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Img URL" name="img">
         </div>
+         @error('img')
+        <span class="bg-danger" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
 
         <select name="type_id" id="">
             <option value="{{ $type[0]->id }}">{{ $type[0]->name }}</option>
@@ -35,7 +50,7 @@
                         </label>
                     </div>
                 @endforeach
-                @error('items')
+                @error('technologies')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

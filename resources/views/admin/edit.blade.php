@@ -10,7 +10,9 @@
                 value="{{ old('title') ?? $project->title }}">
         </div>
         @error('title')
-            <div>NON FUNZIONA</div>
+        <span class="bg-danger" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
         @enderror
         <div class="w-50 m-5">
             <label for="formGroupExampleInput2" class="form-label">Description</label>
@@ -18,7 +20,9 @@
                 name="description" value="{{ old('description') ?? $project->description }}">
         </div>
         @error('description')
-            <div>NON FUNZIONA</div>
+        <span class="bg-danger" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
         @enderror
         <div class="w-50 m-5">
             <label for="formGroupExampleInput2" class="form-label">Image</label>
@@ -26,7 +30,9 @@
                 value="{{ old('img') ?? $project->img }}">
         </div>
         @error('img')
-            <div>NON FUNZIONA</div>
+        <span class="bg-danger" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
         @enderror
         <select name="type_id" id="">
             @foreach ($type as $i => $item)
@@ -49,10 +55,10 @@
                         </label>
                     </div>
                 @endforeach
-                @error('items')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                @error('technologies')
+                <span class="bg-danger" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
         </div>
