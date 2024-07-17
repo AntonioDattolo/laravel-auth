@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 {{-- @include('partials.navbar') --}}
 @section('content')
-    <form action="{{ route('admin.Project.update', $project->id) }}" method="POST">
+    <form action="{{ route('admin.Project.update', $project->id) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <div class="w-50 m-5">
@@ -14,6 +14,14 @@
             <strong>{{ $message }}</strong>
         </span>
         @enderror
+        <div class="mb-3">
+            <label for="cover_image" class="form-label">Choose file</label>
+            <input type="file" class="form-control" name="cover_image" id="cover_image" placeholder="" aria-describedby="coverImageHelper" />
+            <div id="coverImageHelper" class="form-text">Upload an image for the curret project</div>
+            @error('cover_image')
+            <div class="form-text text-danger">{{ $message }}</div>
+            @enderror
+        </div>
         <div class="w-50 m-5">
             <label for="project_description" class="form-label">Description</label>
             <input type="text" class="form-control" id="project_description" placeholder="Description"

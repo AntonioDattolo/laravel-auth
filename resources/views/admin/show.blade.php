@@ -9,7 +9,7 @@
         {{$project->type->name}} 
     </h2>
     <p class="col-12 px-5 text-center">
-       <i class="{{$project->type->icon}}" style="font-size: 50px">&nbsp;&nbsp;</i><i class="{{$technology[0]->icon}}" style="font-size: 45px"></i>
+       <i class="{{$project->type->icon}}" style="font-size: 50px">&nbsp;&nbsp;</i><i class="{{isset($technology[0]->icon)}}" style="font-size: 45px"></i>
     </p>
     <div class="col-12 d-flex p-3" style="border-bottom:2px solid whitesmoke; border-right: 15px solid whitesmoke ">
         <div class="text-center col-6" style="font-size: 40px">{{ $project->description }}   {{$project->type->description}} </div>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 {{-- @include('partials.navbar') --}}
 @section('content')
-    <form action="{{ route('admin.Project.store') }}" method="POST">
+    <form action="{{ route('admin.Project.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="w-50 m-5">
             <label for="formGroupExampleInput" class="form-label">Title</label>
@@ -13,6 +13,14 @@
         </span>
         @enderror
         <div class="w-50 m-5">
+            <label for="cover_image" class="form-label">Choose file</label>
+            <input type="file" class="form-control" name="img" id="cover_image" placeholder="" aria-describedby="coverImageHelper" />
+            <div id="coverImageHelper" class="form-text text-white">Upload an image for the curret project</div>
+            @error('cover_image')
+            <div class="form-text text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="w-50 m-5">
             <label for="formGroupExampleInput2" class="form-label">Description</label>
             <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Description"
                 name="description">
@@ -22,7 +30,7 @@
             <strong>{{ $message }}</strong>
         </span>
         @enderror
-        <div class="w-50 m-5">
+        {{-- <div class="w-50 m-5">
             <label for="formGroupExampleInput2" class="form-label">Image</label>
             <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Img URL" name="img">
         </div>
@@ -30,7 +38,7 @@
         <span class="bg-danger" role="alert">
             <strong>{{ $message }}</strong>
         </span>
-        @enderror
+        @enderror --}}
 
         <select name="type_id" id="">
             <option value="{{ $type[0]->id }}">{{ $type[0]->name }}</option>

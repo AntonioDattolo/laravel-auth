@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -46,12 +47,21 @@ class ProjectController extends Controller
         $newProject->title = $data['title'];
         $newProject->description = $data['description'];
         $newProject->img = $data['img'];
+        if ($request->has('img')) {
+            // save the image
+
+            $image_path = Storage::put('uploads', $newProject->img);
+            $data['img'] = $image_path;
+            //dd($image_path, $val_data);
+        }
         $newProject->type_id = $data['type_id'];
         $newProject->save();
-        $tech= $data['technologies'];
+        $tech= isset($data['technologies']);
 
         if (isset($data['technologies'])) {
             $newProject->technologies()->attach($tech);
+        }else{
+            return redirect()->route('admin.Project.show', $newProject->id);
         }
 
         return redirect()->route('admin.Project.show', $newProject->id);
