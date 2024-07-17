@@ -21,7 +21,7 @@
                             @if (Str::startsWith($item->img, 'http'))
                             <img width="card-img-top object-fit-fill  rounded p-2" src="{{ $item['img'] }}" style="height: 100px; width :100px alt="">
                             @else
-                            <img width="card-img-top object-fit-fill  rounded p-2" src="{{ asset('storage/' . $item->img) }}" style="height: 100px; width :100px alt="">
+                            <img width="card-img-top object-fit-fill  rounded p-2" src="{{ asset('/storage/' . $item->img) }}" style="height: 100px; width :100px alt="">
                             @endif
                 
                         </td>
