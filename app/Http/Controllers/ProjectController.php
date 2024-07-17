@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
+
+
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
+
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -46,12 +51,12 @@ class ProjectController extends Controller
         $newProject = new Project;
         $newProject->title = $data['title'];
         $newProject->description = $data['description'];
-        $newProject->img = $data['img'];
+        // $newProject->img = $data['img'];
         if ($request->has('img')) {
             // save the image
 
-            $image_path = Storage::put('uploads', $newProject->img);
-            $data['img'] = $image_path;
+            $image_path = Storage::put('uploads', $data['img']);
+            $newProject->img= $image_path;
             //dd($image_path, $val_data);
         }
         $newProject->type_id = $data['type_id'];
@@ -126,6 +131,7 @@ class ProjectController extends Controller
     public function destroy(string $id)
     {
         $project =  Project::findOrFail($id);
+        Storage::delete($project->img);
         $project->delete();
 
         return redirect()->route('admin.Project.index');
