@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@include('partials.navbar')
+{{-- @include('partials.navbar') --}}
 @section('content')
     <form action="{{ route('admin.Project.store') }}" method="POST">
         @csrf

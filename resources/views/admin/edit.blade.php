@@ -1,12 +1,12 @@
 @extends('layouts.admin')
-@include('partials.navbar')
+{{-- @include('partials.navbar') --}}
 @section('content')
     <form action="{{ route('admin.Project.update', $project->id) }}" method="POST">
         @method('PUT')
         @csrf
         <div class="w-50 m-5">
-            <label for="formGroupExampleInput" class="form-label">Title</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Project Title" name="title"
+            <label for="project_title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="project_title" placeholder="Project Title" name="title"
                 value="{{ old('title') ?? $project->title }}">
         </div>
         @error('title')
@@ -15,8 +15,8 @@
         </span>
         @enderror
         <div class="w-50 m-5">
-            <label for="formGroupExampleInput2" class="form-label">Description</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Description"
+            <label for="project_description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="project_description" placeholder="Description"
                 name="description" value="{{ old('description') ?? $project->description }}">
         </div>
         @error('description')
@@ -25,8 +25,8 @@
         </span>
         @enderror
         <div class="w-50 m-5">
-            <label for="formGroupExampleInput2" class="form-label">Image</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Img URL" name="img"
+            <label for="project_img" class="form-label">Image</label>
+            <input type="text" class="form-control" id="project_img" placeholder="Img URL" name="img"
                 value="{{ old('img') ?? $project->img }}">
         </div>
         @error('img')
@@ -46,14 +46,27 @@
         <div class="mb-4 row">
             <label for="items" class="col-md-2 col-form-label text-md-right">Technology</label>
             <div class="col-md-10">
-                @foreach ($technology as $item)
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="technologies[]" value="{{ $item->id }}"
-                            id="item{{ $item->id }}">
-                        <label class="form-check-label" for="item{{ $item->id }}">
-                            {{ $item->name }}
-                        </label>
-                    </div>
+               @foreach ($technology as $i => $item)
+                <div class="form-check">
+                         
+                    @if($item->id == isset($project->technologies[$i]->id))
+                    
+                    <input class="form-check-input" type="checkbox" name="technologies[]" value="{{ $item->id }}"
+                    id="item{{ $item->id }}" checked>
+                    <label class="form-check-label" for="item{{ $item->id }}">
+                        {{ $item->name }}
+                    </label>
+                    @else
+                    
+                    <input class="form-check-input" type="checkbox" name="technologies[]" value="{{ $item->id }}"
+                    id="item{{ $item->id }}">
+                    <label class="form-check-label" for="item{{ $item->id }}">
+                        {{ $item->name }}
+                    </label>
+                    
+                    @endif
+                    
+                </div>
                 @endforeach
                 @error('technologies')
                 <span class="bg-danger" role="alert">

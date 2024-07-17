@@ -49,11 +49,11 @@ class ProjectController extends Controller
         $newProject->type_id = $data['type_id'];
         $newProject->save();
         $tech= $data['technologies'];
+
         if (isset($data['technologies'])) {
             $newProject->technologies()->attach($tech);
         }
 
-        
         return redirect()->route('admin.Project.show', $newProject->id);
     }
 
@@ -76,9 +76,9 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
-        $selectedProject =  Project::findOrFail($id);
+        // $selectedProject =  Project::findOrFail($id);
         $data = [
-            "project" => $selectedProject,
+            "project" => Project::findOrFail($id),
             'type' => Type::all(),
             'technology' => Technology::all(),
             // Questo invece è necessario in quanto bisogna passargli tutti gli ID della tabella TYPE
@@ -97,14 +97,11 @@ class ProjectController extends Controller
             "description" => "required|min:10",
             "img" => "required",
             "type_id" => "required",
-             "technologies" => 'array',
-            //  'technologies' => 'exists:technologies,id',
+            "technologies" => 'array',
+            "technologies" => 'exists:technologies,id',
 
         ]);
 
-
-        // $project->fill($data);
-        // $project->save();
         $project->update($data);
         if (isset($data['technologies'])) {
             $project->technologies()->sync($data['technologies']);
