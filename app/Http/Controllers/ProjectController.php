@@ -116,21 +116,31 @@ class ProjectController extends Controller
     public function update(Request $request, string $id)
     {
         $project =  Project::findOrFail($id);
+        Storage::delete($project->img);
         $data = $request->validate([
             "title" => "required|min:3",
             "description" => "required|min:10",
-            "img" => "required|min:5",
+            "img" => "required",
             "type_id" => "required",
             "technologies" => 'array',
             "technologies" => 'exists:technologies,id',
 
         ]);
+         
 
-        $project->update($data);
+       
+         
+        if ($request->has('img')) {
+        
+             $image_path = Storage::put('uploads', $data['img']);
+             $project->img= $image_path;
+
+        }
+        $project->update();
         if (isset($data['technologies'])) {
             $project->technologies()->sync($data['technologies']);
         }
-
+            
         return redirect()->route('admin.Project.show', $project->id );
     }
 

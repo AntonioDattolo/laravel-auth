@@ -14,7 +14,7 @@ class project_technology_table extends Seeder
      */
     public function run(Faker $faker): void
     {
-        for ($i=0; $i < 10 ; $i++) {
+        for ($i=0; $i < 25 ; $i++) {
             $sql = 'insert into project_technology ( project_id , technology_id  ) values (?, ?)';
             $project = $faker->numberBetween(1,10);
             $tech= $faker->numberBetween(1,4);

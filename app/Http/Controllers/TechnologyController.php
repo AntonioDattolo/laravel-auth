@@ -33,8 +33,8 @@ class TechnologyController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'description'=> 'required',
+            'name' => 'required|min:3',
+            'description'=> 'required|min:10',
             'icon'=> 'required',
         ]);
 

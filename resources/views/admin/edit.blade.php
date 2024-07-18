@@ -15,10 +15,10 @@
         </span>
         @enderror
         <div class="mb-3">
-            <label for="cover_image" class="form-label">Choose file</label>
-            <input type="file" class="form-control" name="cover_image" id="cover_image" placeholder="" aria-describedby="coverImageHelper" />
+            <label for="cover_img" class="form-label">Choose file</label>
+            <input type="file" class="form-control" name="img" id="cover_image" placeholder="" aria-describedby="coverImageHelper" />
             <div id="coverImageHelper" class="form-text">Upload an image for the curret project</div>
-            @error('cover_image')
+            @error('img')
             <div class="form-text text-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -32,7 +32,7 @@
             <strong>{{ $message }}</strong>
         </span>
         @enderror
-        <div class="w-50 m-5">
+        {{-- <div class="w-50 m-5">
             <label for="project_img" class="form-label">Image</label>
             <input type="text" class="form-control" id="project_img" placeholder="Img URL" name="img"
                 value="{{ old('img') ?? $project->img }}">
@@ -41,7 +41,7 @@
         <span class="bg-danger" role="alert">
             <strong>{{ $message }}</strong>
         </span>
-        @enderror
+        @enderror --}}
         <select name="type_id" id="">
             @foreach ($type as $i => $item)
                 @if($item->id == $project->type->id )
