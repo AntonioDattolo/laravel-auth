@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Project;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
 
@@ -20,6 +21,7 @@ class ProjectTableSeeder extends Seeder
             $newProject->title = $faker->sentence(2);
             $newProject->description = $faker->sentence(22);
             $newProject->img = "https://picsum.photos/id/" . rand(1, 250) . "/450/450";
+            $newProject->slug = STR::slug($newProject->title, '-');
             $newProject->type_id = $faker->numberBetween(1,4);
             
             // $newProject->projects()->attach($i+1);

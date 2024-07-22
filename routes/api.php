@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('projects', [ProjectController::class, 'index']);
+
+// rotta per trovare un progetto singolo con chaiamta axios
+Route::get('project/{project}',[ProjectController::class, 'show']);
