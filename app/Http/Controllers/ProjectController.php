@@ -67,7 +67,7 @@ class ProjectController extends Controller
             $image_path = Storage::put('uploads', $data['img']);
             $newProject->img= $image_path; 
         }
-
+        $newProject->slug = STR::slug($newProject->title, '-');
         $newProject->type_id = $data['type_id'];
         $newProject->save();
         $tech= isset($data['technologies']);
@@ -136,6 +136,10 @@ class ProjectController extends Controller
              $project->img= $image_path;
 
         }
+        $project->title = $data['title'];
+        $project->description = $data['description'];
+        $project->type_id = $data['type_id'];
+        $project->slug = STR::slug($data['title'], '-');
         $project->update();
         if (isset($data['technologies'])) {
             $project->technologies()->sync($data['technologies']);

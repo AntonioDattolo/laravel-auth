@@ -16,14 +16,28 @@ class ProjectController extends Controller
         ]);
     }
     public function show($slug){
-        $project = [
-            'project' => Project::with('technologies', 'type')->where('slug', $slug)->get()
-        ];
+        // $project = [
+        //     'project' => Project::with('technologies', 'type')->where('slug', $slug)->get()
+        // ];
         
-        return response()->json([
-            'success' => true,
-            'result' => $project    
-        ]);
+        // return response()->json([
+        //     'success' => true,
+        //     'result' => $project    
+        // ]);
+
+        $project =  Project::with('technologies', 'type')->where('slug', $slug)->first();
+        
+        if ($project) {
+            return response()->json([
+                'success' => true,
+                'result' => $project
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'not found'
+            ]);
+        }
         
     }
 }
