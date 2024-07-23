@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\ProjectController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\LeadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('projects', [ProjectController::class, 'index']);
 
-// rotta per trovare un progetto singolo con chaiamta axios
+// rotta per trovare un progetto singolo con chiamata axios
 Route::get('project/{project}',[ProjectController::class, 'show']);
+
+/// rotta per il form di contatcs(dove inviare i dati)
+Route::post('/contacts',[LeadController::class, 'store']);

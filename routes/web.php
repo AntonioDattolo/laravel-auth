@@ -37,3 +37,8 @@ Route::middleware(['auth'])
 
 
 require __DIR__ . '/auth.php';
+// route per vedere il template della mail da inviare
+Route::get('/mailable', function () {
+    $lead = ['name' => "antonio", 'email' => 'antonio@example.it'];
+    return view('mail.NewLeadMessage');
+});
